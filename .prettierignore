@@ -1,0 +1,12 @@
+.DS_Store
+.eslintignore
+.editorconfig
+.gitignore
+.prettierignore
+LICENSE
+.eslintcache
+*.lock
+yarn-error.log
+/build
+/public
+node_modules/

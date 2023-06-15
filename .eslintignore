@@ -1,0 +1,45 @@
+# dependencies
+/node_modules
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# production
+build/
+dist/
+public/
+
+# misc
+.DS_Store
+.env
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE files
+.idea
+
+# generated files
+/public/themes
+
+# dependencies
+node_modules/
+.yarn/
+.eslintrc.js
+
+package-lock.json
+
+# ide
+.vscode/
+
+# JSON SERVER
+db.json
+routes.json
+
+react-app-env.d.ts
+reportWebVitals.ts
