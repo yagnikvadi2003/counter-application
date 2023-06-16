@@ -19,19 +19,24 @@ export const counterSlice = createSlice({
 			// immutable state based off those changes
 			state.count += 1;
 		},
-		decrement: (state) => {
+		decrement: (state): void => {
 			state.count -= 1;
 		},
 		incrementByAmount: (state, action: PayloadAction<number>) => {
 			state.count += action.payload;
 		},
-		reset: (state) => {
+		asynchronous: (state): void => {
+			// , action: PayloadAction<number>
+			state.count += 2;
+		},
+		reset: (state): void => {
 			state.count = 0;
 		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount, reset } = counterSlice.actions;
+export const { increment, decrement, incrementByAmount, asynchronous, reset } =
+	counterSlice.actions;
 
 export default counterSlice.reducer;
