@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { decrement, increment, incrementByAmount, reset } from "./app/counterSlice";
+import { decrement, increment, incrementAsync, incrementByAmount, reset } from "./app/counterSlice";
 import { RootState } from "./app/store";
 import reactLogo from "./assets/react.svg";
 
@@ -10,6 +10,7 @@ import "./App.css";
 import viteLogo from "/vite.svg";
 
 const App: React.FunctionComponent = (): JSX.Element => {
+	// Access the count value from the counter state using useSelector
 	const { count } = useSelector((state: RootState) => state.counter); // see store.ts
 	const dispatch = useDispatch();
 
@@ -48,7 +49,13 @@ const App: React.FunctionComponent = (): JSX.Element => {
 					+10
 				</button>
 				<br />
-				{/* <button onClick={(e) => handleAsynchronous(e)}>async Event +2</button> */}
+				<button
+					onClick={() => {
+						dispatch(incrementAsync());
+					}}
+				>
+					async Event +2
+				</button>
 				<button
 					onClick={() => {
 						dispatch(reset());

@@ -1,12 +1,19 @@
 import { delay, put, takeEvery } from "redux-saga/effects";
 
-import { asynchronous } from "./counterSlice";
+import { incrementAsync, incrementAsyncFailure, incrementAsyncSuccess } from "./counterSlice";
 
-function* incrementAsyncSaga(action: ReturnType<typeof asynchronous>) {
-	yield delay(5000); // Simulate an asynchronous operation
-	yield put(asynchronous(action.payload)); // Dispatch the increment action
+// Saga function to handle the incrementAsync action
+function* incrementAsyncSaga(action: ReturnType<typeof incrementAsync>) {
+	console.warn("asynchronous", action, action.payload);
+	try {
+		yield delay(5000); // Simulate an asynchronous operation with a delay of 5 seconds
+		yield put(incrementAsyncSuccess(action.payload)); // Dispatch the success action with the payload
+	} catch (error) {
+		yield put(incrementAsyncFailure()); // Dispatch the failure action
+	}
 }
 
+// Root saga function to watch for the incrementAsync action and run the corresponding saga
 export function* counterSaga() {
-	yield takeEvery(asynchronous.type, incrementAsyncSaga);
+	yield takeEvery(incrementAsync.type, incrementAsyncSaga);
 }
