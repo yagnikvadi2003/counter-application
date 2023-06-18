@@ -1,12 +1,13 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
+import { decrement, increment, incrementByAmount, reset } from "./app/counterSlice";
+import { RootState } from "./app/store";
 import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
 import "./App.css";
 
-import { decrement, increment, incrementByAmount, asynchronous, reset } from "./app/counterSlice";
-import { RootState } from "./app/store";
+import viteLogo from "/vite.svg";
 
 const App: React.FunctionComponent = (): JSX.Element => {
 	const { count } = useSelector((state: RootState) => state.counter); // see store.ts
@@ -15,10 +16,10 @@ const App: React.FunctionComponent = (): JSX.Element => {
 	return (
 		<>
 			<div>
-				<a href="https://vitejs.dev" target="_blank">
+				<a href="https://vitejs.dev" target="_blank" rel="noreferrer">
 					<img src={viteLogo} className="logo" alt="Vite logo" />
 				</a>
-				<a href="https://react.dev" target="_blank">
+				<a href="https://react.dev" target="_blank" rel="noreferrer">
 					<img src={reactLogo} className="logo react" alt="React logo" />
 				</a>
 			</div>
@@ -47,13 +48,7 @@ const App: React.FunctionComponent = (): JSX.Element => {
 					+10
 				</button>
 				<br />
-				<button
-					onClick={() => {
-						dispatch(asynchronous());
-					}}
-				>
-					async Event +2
-				</button>
+				{/* <button onClick={(e) => handleAsynchronous(e)}>async Event +2</button> */}
 				<button
 					onClick={() => {
 						dispatch(reset());

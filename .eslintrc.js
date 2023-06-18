@@ -2,27 +2,46 @@ module.exports = {
 	env: { browser: true, es2020: true },
 	extends: [
 		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended",
-		"plugin:react-hooks/recommended",
-		"prettier",
+		"plugin:react/recommended",
 		"plugin:prettier/recommended",
+		"plugin:@typescript-eslint/recommended",
 	],
 	parser: "@typescript-eslint/parser",
-	parserOptions: { ecmaVersion: "latest", sourceType: "module" },
-	plugins: ["prettier", "react", "react-hooks", "@typescript-eslint", "react-refresh"],
-	settings: {
-		"import/resolver": {
-			typescript: {
-				project: "./tsconfig.json",
-			},
+	parserOptions: {
+		ecmaVersion: 6,
+		sourceType: "module",
+		ecmaFeatures: {
+			jsx: true,
 		},
+		project: "./tsconfig.json",
+	},
+	plugins: [
+		"prettier",
+		"react",
+		"react-hooks",
+		"@typescript-eslint",
+		"react-refresh",
+		"simple-import-sort",
+		"import",
+	],
+	settings: {
 		react: {
 			version: "18.x",
+		},
+		typescript: {
+			version: "5.x",
 		},
 	},
 	rules: {
 		eqeqeq: ["error", "always"],
+		"react/react-in-jsx-scope": "off",
+		"react/prop-types": [2],
 		"react-refresh/only-export-components": "warn",
+		"import/first": "error",
+		"import/no-duplicates": "error",
+		"import/newline-after-import": "error",
+		"simple-import-sort/imports": "error",
+		"simple-import-sort/exports": "error",
 		semi: ["error", "always"],
 		"jsx-quotes": ["error", "prefer-double"],
 		quotes: ["error", "double"],
@@ -57,9 +76,9 @@ module.exports = {
 		"react-hooks/rules-of-hooks": "error",
 		"react-hooks/exhaustive-deps": "warn",
 		"react/jsx-uses-react": "off",
-		"@typescript-eslint/explicit-function-return-type": "error",
 		"@typescript-eslint/no-unused-vars": ["error"],
 		"@typescript-eslint/no-var-requires": "off",
+		"@typescript-eslint/no-explicit-any": ["off"],
 		"@typescript-eslint/typedef": [
 			"error",
 			{
@@ -68,4 +87,31 @@ module.exports = {
 			},
 		],
 	},
+	overrides: [
+		{
+			files: ["*.js", "*.jsx", "*.ts", "*.tsx"],
+			rules: {
+				"simple-import-sort/imports": [
+					"error",
+					{
+						groups: [
+							// Packages `react` related packages come first.
+							["^react", "^@?\\w"],
+							// Internal packages.
+							["^(@|components)(/.*|$)"],
+							// Side effect imports.
+							["^\\u0000"],
+							// Parent imports. Put `..` last.
+							["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+							// Other relative imports. Put same-folder imports and `.` last.
+							["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+							// Style imports.
+							["^.+\\.?(css)$"],
+						],
+					},
+				],
+			},
+		},
+	],
+	ignorePatterns: ["node_modules", "build", "dist", "public"],
 };

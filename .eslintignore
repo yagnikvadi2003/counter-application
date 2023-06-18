@@ -43,3 +43,6 @@ routes.json
 
 react-app-env.d.ts
 reportWebVitals.ts
+
+.vscode/*
+!.vscode/extensions.json
