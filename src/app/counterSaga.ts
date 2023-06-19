@@ -4,7 +4,6 @@ import { incrementAsync, incrementAsyncFailure, incrementAsyncSuccess } from "./
 
 // Saga function to handle the incrementAsync action
 function* incrementAsyncSaga(action: ReturnType<typeof incrementAsync>) {
-	console.warn("asynchronous", action, action.payload);
 	try {
 		yield delay(5000); // Simulate an asynchronous operation with a delay of 5 seconds
 		yield put(incrementAsyncSuccess(action.payload)); // Dispatch the success action with the payload

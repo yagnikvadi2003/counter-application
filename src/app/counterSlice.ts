@@ -7,10 +7,10 @@ export interface CounterState {
 }
 
 // Define the initial state of the counter
-const initialState: CounterState = {
+const initialState: CounterState = Object.freeze({
 	count: 0,
 	status: "idle",
-};
+});
 
 // Create the counter slice using createSlice
 export const counterSlice = createSlice({

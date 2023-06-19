@@ -11,8 +11,8 @@ import viteLogo from "/vite.svg";
 
 const App: React.FunctionComponent = (): JSX.Element => {
 	// Access the count value from the counter state using useSelector
-	const { count } = useSelector((state: RootState) => state.counter); // see store.ts
 	const dispatch = useDispatch();
+	const { count } = useSelector((state: RootState) => state.counter); // see store.ts
 
 	return (
 		<>
