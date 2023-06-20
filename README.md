@@ -67,4 +67,4 @@ Contributions are welcome! If you have any suggestions, bug reports, or feature 
 5. Submit a pull request explaining your changes.
 
 ## License
-This project is licensed under the [MIT License](https://github.com/CreativeThinker2023/counter-application).
+This project is licensed under the [MIT License](https://github.com/CreativeThinker2023/counter-application/blob/production/LICENSE).
