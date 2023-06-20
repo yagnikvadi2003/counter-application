@@ -1,10 +1,6 @@
+import { toast } from "react-toastify";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-// Define the shape of the counter state
-export interface CounterState {
-	count: number;
-	status: "idle" | "loading" | "failed";
-}
+import { CounterState } from "interfaces/CounterState";
 
 // Define the initial state of the counter
 const initialState: CounterState = Object.freeze({
@@ -23,7 +19,19 @@ export const counterSlice = createSlice({
 		},
 		// Reducer to decrement the count by 1
 		decrement: (state): void => {
-			state.count -= 1;
+			// Check if the count is greater than zero
+			if (state.count > 0) {
+				state.count -= 1;
+			} else {
+				// If count is already zero, do nothing
+				toast.error("If count is already zero", {
+					position: toast.POSITION.BOTTOM_RIGHT,
+					autoClose: 3000,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+				});
+			}
 		},
 		// Reducer to increment the count by a specific amount
 		incrementByAmount: (state, action: PayloadAction<number>) => {
@@ -42,9 +50,37 @@ export const counterSlice = createSlice({
 		incrementAsyncFailure: state => {
 			state.status = "failed";
 		},
+		// Reducer to increment the count by a input amount
+		incrementByValue: (state, action) => {
+			state.count += action.payload;
+		},
+		// Reducer to decrement the count by a input amount
+		decrementByValue: (state, action) => {
+			if (state.count === 0) {
+				toast.error("Cannot Decrement Below 0", {
+					position: toast.POSITION.BOTTOM_RIGHT,
+					autoClose: 3000,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+				});
+			} else {
+				state.count -= action.payload;
+			}
+		},
 		// Reducer to reset the count to 0
 		reset: (state): void => {
-			state.count = 0;
+			if (state.count === 0) {
+				toast.error("Count has been reset to 0", {
+					position: toast.POSITION.BOTTOM_RIGHT,
+					autoClose: 3000,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+				});
+			} else {
+				state.count = 0;
+			}
 		},
 	},
 });
@@ -57,6 +93,8 @@ export const {
 	incrementAsync,
 	incrementAsyncSuccess,
 	incrementAsyncFailure,
+	incrementByValue,
+	decrementByValue,
 	reset,
 } = counterSlice.actions;
 

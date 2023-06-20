@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -webkit-appearance: textfield;  /* Safari and Chrome */
+  -moz-appearance: textfield;     /* Firefox */
+  -ms-appearance: textfield;      /* Internet Explorer/Edge */
+  appearance: textfield;          /* Standard syntax */
+}
